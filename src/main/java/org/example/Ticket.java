@@ -2,12 +2,12 @@ package org.example;
 
 import java.util.Objects;
 
-public class Ticket {
-    private String froTm; // аэропорт откуда
-    private String to; // аэропорт куда
-    private int price; // цена
-    private int timeFrom; // время вылета (по москве)
-    private int timeTo; // время прилёта (по москве)
+public class Ticket implements Comparable<Ticket> {
+    private final String from; // аэропорт откуда
+    private final String to; // аэропорт куда
+    private final int price; // цена
+    private final int timeFrom; // время вылета (по москве)
+    private final int timeTo; // время прилёта (по москве)
 
     public Ticket(String from, String to, int price, int timeFrom, int timeTo) {
         this.from = from;
@@ -50,5 +50,16 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(from, to, price, timeFrom, timeTo);
+    }
+
+    @Override
+    public int compareTo(Ticket o) {
+        if (price < o.getPrice()) {
+            return -1;
+        }
+        if (price > o.getPrice()) {
+            return 1;
+        }
+        return 0;
     }
 }
